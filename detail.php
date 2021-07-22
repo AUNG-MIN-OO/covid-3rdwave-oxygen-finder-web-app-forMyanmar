@@ -16,7 +16,7 @@
                                     <p>
                                         <?php echo $detail['description'] ?>
                                     </p>
-                                    <a href="index.php" class="btn bg-button btn-sm float-end">နောက်သို့</a>
+                                    <a href="javascript:history.go(-1)" class="btn bg-button btn-sm float-end">နောက်သို့</a>
                                 </div>
                             </div>
                         <?php } ?>

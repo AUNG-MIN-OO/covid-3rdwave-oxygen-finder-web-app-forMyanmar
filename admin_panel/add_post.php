@@ -6,12 +6,18 @@ if (empty($_SESSION['user_id']) || empty($_SESSION['logged_in'])){
 }
 
 if ($_POST){
-    if (empty($_POST['title']) || empty($_POST['description']) || empty($_POST['category']) || empty($_POST['tag'])){
+    if (empty($_POST['title']) || empty($_POST['description']) || empty($_POST['division']) || empty($_POST['phNum']) || empty($_POST['category']) || empty($_POST['tag'])){
         if (empty($_POST['title'])){
             $tErr = "Title is required";
         }
         if (empty($_POST['description'])){
             $dErr = "Description is required";
+        }
+        if (empty($_POST['division'])){
+            $divisionErr = "Division is required";
+        }
+        if (empty($_POST['phNum'])){
+            $phNumErr = "Phone number is required";
         }
         if (empty($_POST['category'])){
             $catErr = "Category is required";
@@ -25,13 +31,15 @@ if ($_POST){
         }else{
             $title = $_POST['title'];
             $description = $_POST['description'];
+            $division = $_POST['division'];
+            $phNum = $_POST['phNum'];
             $category_id = $_POST['category'];
             $tag = $_POST['tag'];
             $user_id = $_SESSION['user_id'];
 
-            $stmt = $pdo->prepare("INSERT INTO posts(title,description,category_id,user_id,tag) VALUES (:title,:description,:category_id,:user_id,:tag)");
+            $stmt = $pdo->prepare("INSERT INTO posts(title,description,division,ph_num,category_id,user_id,tag) VALUES (:title,:description,:division,:phNum,:category_id,:user_id,:tag)");
             $result = $stmt->execute(
-                    array(':title'=>$title,':description'=>$description,':category_id'=>$category_id,':user_id'=>$user_id,':tag'=>$tag)
+                    array(':title'=>$title,':description'=>$description,':division'=>$division,':phNum'=>$phNum,':category_id'=>$category_id,':user_id'=>$user_id,':tag'=>$tag)
             );
             if ($result){
                 $_SESSION['status'] = "New Post is added";
@@ -93,9 +101,24 @@ if (!empty($_SESSION['status'])){
                         <small class="fw-bold text-danger"><?php echo (!empty($tErr))?"*$tErr":""; ?></small>
                     </div>
                     <div class="mb-4">
+                        <label for="tag" class="mb-2">Tags <span class="text-white-50">(helper's name)</span></label>
+                        <input type="text" id="tag" name="tag" class="form-control">
+                        <small class="fw-bold text-danger"><?php echo (!empty($tagErr))?"*$tagErr":""; ?></small>
+                    </div>
+                    <div class="mb-4">
+                        <label for="division" class="mb-2">Division <span class="text-white-50">(တိုင်း/ပြည်နယ်)</span></label>
+                        <input type="text" id="division" name="division" class="form-control">
+                        <small class="fw-bold text-danger"><?php echo (!empty($divisionErr))?"*$divisionErr":""; ?></small>
+                    </div>
+                    <div class="mb-4">
                         <label for="desc" class="mb-2">Description</label>
                         <textarea id="description" class="textarea w-100 p-2" name="description" rows="20" placeholder="Something else here"></textarea>
                         <small class="fw-bold text-danger"><?php echo (!empty($dErr))?"*$dErr":""; ?></small>
+                    </div>
+                    <div class="mb-4">
+                        <label for="phNum" class="mb-2">Phone Number</label>
+                        <input type="number" id="phNum" class="form-control" name="phNum">
+                        <small class="fw-bold text-danger"><?php echo (!empty($phNumErr))?"*$phNumErr":""; ?></small>
                     </div>
                     <div class="mb-4">
                         <label for="category" class="mb-2">Choose Category</label>
@@ -108,11 +131,6 @@ if (!empty($_SESSION['status'])){
                             <?php } ?>
                         </select>
                         <small class="fw-bold text-danger"><?php echo (!empty($catErr))?"*$catErr":""; ?></small>
-                    </div>
-                    <div class="mb-4">
-                        <label for="tag" class="mb-2">Tags <span class="text-white-50">(helper's name)</span></label>
-                        <input type="text" id="tag" name="tag" class="form-control">
-                        <small class="fw-bold text-danger"><?php echo (!empty($tagErr))?"*$tagErr":""; ?></small>
                     </div>
                     <button class="btn bg-button float-end">Create Now</button>
                 </form>

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="vendor/feather-icons-web/feather.css">
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="vendor/animate_it/animate.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>

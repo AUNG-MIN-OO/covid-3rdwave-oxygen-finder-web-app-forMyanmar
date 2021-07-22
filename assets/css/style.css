@@ -4,6 +4,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
 }
 :root{
     --background-blue : #556ee6;
@@ -66,7 +67,7 @@ a:hover{
     border-radius: 15px;
     background-color: var(--background-dark);
 }
-.content-card ul li{
+.content-card>ul>li{
     font-size: 20px;
 }
 /*side bar css*/

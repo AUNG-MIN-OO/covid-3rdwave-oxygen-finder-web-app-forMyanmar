@@ -59,6 +59,7 @@ if (!empty($_SESSION['status'])){
                             <th>Description</th>
                             <th>Category</th>
                             <th>Tag</th>
+                            <th>Division</th>
                             <th>Creator</th>
                             <th>Actions</th>
                             <th>Date</th>
@@ -88,6 +89,7 @@ if (!empty($_SESSION['status'])){
                                 <td><?php echo strlen($post['description'])<100?"$desc":"$subDesc"; ?></td>
                                 <td><?php echo $catResult[0]['category_name']; ?></td>
                                 <td><?php echo $post['tag']; ?></td>
+                                <td><?php echo $post['division']; ?></td>
                                 <td class="text-nowrap"><?php echo $userResult['name']; ?></td>
                                 <td class="text-nowrap">
                                     <a href="post_edit.php?id=<?php echo $post['id'];?>" class="btn btn-warning btn-sm"><i class="feather-edit-3"></i></a>
